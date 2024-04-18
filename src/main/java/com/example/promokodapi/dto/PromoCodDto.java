@@ -14,6 +14,8 @@ public class PromoCodDto {
 
     private String promoName;
 
+    private String title;
+
     private String startPrice;
 
     private String discountPrice;
