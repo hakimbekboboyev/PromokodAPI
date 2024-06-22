@@ -1,0 +1,12 @@
+POST http://localhost:9090/addPromoCod
+Accept-Post:
+
+{
+"companyName" : "asdasd",
+"promoName" : "asd",
+"title" : "saasdqwd",
+"image" : "asdadqwds",
+"startPrice" : "asdasddqwd",
+"discountPrice" : "asdqwdq",
+"expireDate" : 12
+}

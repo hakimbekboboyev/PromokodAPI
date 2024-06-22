@@ -16,11 +16,13 @@ public class PromoCodDto {
 
     private String title;
 
+    private String image;
+
     private String startPrice;
 
     private String discountPrice;
 
-    private Integer expireDate;
+    private String expireDate;
 
     private Boolean isActive;
 }

@@ -1,8 +1,4 @@
 spring:
-  servlet:
-    multipart:
-      max-file-size: 1024MB
-      max-request-size: 1024MB
   application:
     name: PromokodAPI
   datasource:
@@ -13,7 +9,7 @@ spring:
   jpa:
 
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
     show-sql: true
     properties:
       hibernate:

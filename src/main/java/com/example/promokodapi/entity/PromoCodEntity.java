@@ -28,11 +28,10 @@ public class PromoCodEntity {
 
     private String discountPrice;
 
-    private Date expireDate;
+    private String expireDate;
 
     private Boolean isActive;
 
-    @OneToOne
-    private AttachmentContent image;
+    private String image;
 
 }
