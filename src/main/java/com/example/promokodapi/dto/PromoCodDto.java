@@ -10,6 +10,9 @@ import lombok.NoArgsConstructor;
 @Data
 @Builder
 public class PromoCodDto {
+
+    private int categoryId;
+
     private String companyName;
 
     private String promoName;
