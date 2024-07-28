@@ -3,6 +3,7 @@ package com.example.promokodapi.repository;
 import com.example.promokodapi.entity.PromoCodEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -14,4 +15,11 @@ public interface PromoRepository extends JpaRepository<PromoCodEntity,Integer> {
     List<PromoCodEntity> getAll();
 
     Optional<PromoCodEntity> findAllByPromoName(String promoName);
+
+    @Query(value = "SELECT * FROM _promokod WHERE company_name || promo_name || title LIKE %?1%\n" +
+            "UNION\n" +
+            "SELECT * FROM _promokod WHERE company_name || promo_name || title LIKE %?1%\n" +
+            "UNION\n" +
+            "SELECT * FROM _promokod WHERE company_name || promo_name || title LIKE %?1%",nativeQuery = true)
+    List<PromoCodEntity> findAllByQuery(String query);
 }

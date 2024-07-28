@@ -2,6 +2,8 @@ package com.example.promokodapi.service;
 
 import com.example.promokodapi.dto.CategoryDto;
 import com.example.promokodapi.dto.PromoCodDto;
+import com.example.promokodapi.dto.ResponsePromo;
+import com.example.promokodapi.dto.ResponseSearch;
 import com.example.promokodapi.entity.CategoryEntity;
 import com.example.promokodapi.entity.PromoCodEntity;
 import com.example.promokodapi.repository.CategoryRepository;
@@ -11,7 +13,6 @@ import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -98,6 +99,68 @@ public class PromoService implements BaseService<PromoCodEntity> {
     @Override
     public List<CategoryEntity> getAllCategory() {
         return categoryRepository.findAll();
+    }
+
+    @Override
+    public ResponsePromo getPromoCodeById(int id) {
+        Optional<PromoCodEntity> promoCod = promoRepository.findById(id);
+        if (promoCod.isPresent()) {
+            return ResponsePromo.builder()
+                    .responseEntity(promoCod.get())
+                    .status(200)
+                    .message("Successful")
+                    .build();
+        }
+        else {
+            return ResponsePromo.builder()
+                    .responseEntity(null)
+                    .status(404)
+                    .message("Not found")
+                    .build();
+        }
+    }
+
+    @Override
+    public ResponsePromo updatePromoCode(int id, PromoCodDto promoCodDto) {
+        Optional<PromoCodEntity> promoCod = promoRepository.findById(id);
+        PromoCodEntity resultEntity = new PromoCodEntity();
+        if (promoCod.isPresent()) {
+            PromoCodEntity promoCodEntity = promoCod.get();
+            promoCodEntity.setPromoName(promoCodDto.getPromoName());
+            promoCodEntity.setImage(promoCodDto.getImage());
+            promoCodEntity.setStartPrice(promoCodDto.getStartPrice());
+            promoCodEntity.setDiscountPrice(promoCodDto.getDiscountPrice());
+            promoCodEntity.setExpireDate(promoCodDto.getExpireDate());
+            resultEntity = promoRepository.save(promoCodEntity);
+            return ResponsePromo.builder()
+                    .responseEntity(resultEntity)
+                    .status(200)
+                    .message("Successful Updated Promo Code")
+                    .build();
+        }else return ResponsePromo.builder()
+                .responseEntity(null)
+                .status(404)
+                .message("Promo Code Not Found")
+                .build();
+
+
+    }
+
+    @Override
+    public ResponseSearch search(String query) {
+        List<PromoCodEntity> resultList = promoRepository.findAllByQuery(query);
+        if (!resultList.isEmpty()) {
+            return ResponseSearch.builder()
+                    .promoCodEntityList(resultList)
+                    .status(200)
+                    .message("Successful Search")
+                    .build();
+        }
+        else return ResponseSearch.builder()
+                .promoCodEntityList(null)
+                .status(404)
+                .message("Not found")
+                .build();
     }
 
 
