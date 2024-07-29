@@ -163,5 +163,21 @@ public class PromoService implements BaseService<PromoCodEntity> {
                 .build();
     }
 
+    @Override
+    public ResponsePromo getCategoryById(int id) {
+        Optional<CategoryEntity> byId = categoryRepository.findById(id);
+        if (byId.isPresent()) {
+            return ResponsePromo.builder()
+                    .responseEntity(byId.get())
+                    .status(200)
+                    .message("Successful Get Category")
+                    .build();
+        }else return ResponsePromo.builder()
+                .responseEntity(null)
+                .status(404)
+                .message("Not found")
+                .build();
+    }
+
 
 }

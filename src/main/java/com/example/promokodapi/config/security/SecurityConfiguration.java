@@ -44,6 +44,7 @@ public class SecurityConfiguration {
                         .requestMatchers("/api/v1/promo/getAllPromo/**").permitAll()
                         .requestMatchers("/api/v1/promo/search/**").permitAll()
                         .requestMatchers("/api/v1/promo/getAllCategory/**").permitAll()
+                        .requestMatchers("/api/v1/promo/category/**").permitAll()
                         .requestMatchers("/api/v1/promo/updatePromo/**").hasRole("ADMIN")
                         .requestMatchers("/api/v1/promo/createCategory").hasRole("ADMIN")
                         .requestMatchers("/api/v1/promo/addPromoCod").hasRole("ADMIN")

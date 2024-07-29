@@ -25,4 +25,6 @@ public interface BaseService <T>{
     ResponsePromo updatePromoCode(int id, PromoCodDto promoCodDto);
 
     ResponseSearch search(String query);
+
+    ResponsePromo getCategoryById(int id);
 }

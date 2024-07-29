@@ -27,10 +27,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
                 )
         ),
         servers = {
-                /*@Server(
+                @Server(
                         description = "Dev api",
-                        url = "http://18.144.62.147:8081"
-                ),*/
+                        url = "http://3.129.216.238:9090"
+                ),
                 @Server(
                         description = "Dev(test)",
                         url = "http://localhost:9090"

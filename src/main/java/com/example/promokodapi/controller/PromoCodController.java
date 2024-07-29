@@ -77,4 +77,12 @@ public class PromoCodController implements BaseController {
         ResponseSearch result = promoService.search(keyword);
         return ResponseEntity.status(result.getStatus()).body(result);
     }
+
+    @Override
+    @Operation(summary = "getCategoryById", description = "Get category by id")
+    @GetMapping("/category/{id}")
+    public ResponseEntity<ResponsePromo> getCategoryById(@PathVariable int id) {
+        ResponsePromo categoryById = promoService.getCategoryById(id);
+        return ResponseEntity.status(categoryById.getStatus()).body(categoryById);
+    }
 }

@@ -18,4 +18,5 @@ public interface BaseController {
     ResponseEntity<ResponsePromo> getPromoCodById(int id);
     ResponseEntity<ResponsePromo> updatePromoCod(int id, PromoCodDto promoCodDto);
     ResponseEntity<ResponseSearch> search(String keyword);
+    ResponseEntity<ResponsePromo> getCategoryById(int id);
 }
