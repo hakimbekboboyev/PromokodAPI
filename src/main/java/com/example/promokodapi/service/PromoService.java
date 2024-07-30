@@ -34,6 +34,7 @@ public class PromoService implements BaseService<PromoCodEntity> {
         CategoryEntity categoryEntity = CategoryEntity.builder()
                 .name(categoryDto.getName())
                 .description(categoryDto.getDescription())
+                .rating(0)
                 .build();
         categoryRepository.save(categoryEntity);
         return "Successful";
@@ -56,6 +57,8 @@ public class PromoService implements BaseService<PromoCodEntity> {
                 .startPrice(promoCodDto.getStartPrice())
                 .discountPrice(promoCodDto.getDiscountPrice())
                 .expireDate(promoCodDto.getExpireDate())
+                .link(promoCodDto.getLink())
+                .rating(0)
                 .build();
         Optional<CategoryEntity> optionalCategory = categoryRepository.findById(promoCodDto.getCategoryId());
         if (optionalCategory.isPresent()) {
@@ -105,8 +108,11 @@ public class PromoService implements BaseService<PromoCodEntity> {
     public ResponsePromo getPromoCodeById(int id) {
         Optional<PromoCodEntity> promoCod = promoRepository.findById(id);
         if (promoCod.isPresent()) {
+            PromoCodEntity promoCodEntity = promoCod.get();
+            promoCodEntity.setRating(promoCodEntity.getRating()+1);
+            promoRepository.save(promoCodEntity);
             return ResponsePromo.builder()
-                    .responseEntity(promoCod.get())
+                    .responseEntity(promoCodEntity)
                     .status(200)
                     .message("Successful")
                     .build();
@@ -131,6 +137,8 @@ public class PromoService implements BaseService<PromoCodEntity> {
             promoCodEntity.setStartPrice(promoCodDto.getStartPrice());
             promoCodEntity.setDiscountPrice(promoCodDto.getDiscountPrice());
             promoCodEntity.setExpireDate(promoCodDto.getExpireDate());
+            promoCodEntity.setLink(promoCodDto.getLink());
+            promoCodEntity.setRating(0);
             resultEntity = promoRepository.save(promoCodEntity);
             return ResponsePromo.builder()
                     .responseEntity(resultEntity)
@@ -167,6 +175,9 @@ public class PromoService implements BaseService<PromoCodEntity> {
     public ResponsePromo getCategoryById(int id) {
         Optional<CategoryEntity> byId = categoryRepository.findById(id);
         if (byId.isPresent()) {
+            CategoryEntity categoryEntity = byId.get();
+            categoryEntity.setRating(categoryEntity.getRating()+1);
+            categoryRepository.save(categoryEntity);
             return ResponsePromo.builder()
                     .responseEntity(byId.get())
                     .status(200)

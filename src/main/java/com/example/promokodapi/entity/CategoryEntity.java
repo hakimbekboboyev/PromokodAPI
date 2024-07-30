@@ -19,7 +19,9 @@ public class CategoryEntity {
     private int id;
     private String name;
     private String description;
-    private String rating;
+    private long rating;
+
+
 
     @OneToMany
     private List<PromoCodEntity> promoCodList;

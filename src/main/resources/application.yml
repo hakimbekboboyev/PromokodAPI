@@ -19,6 +19,11 @@ spring:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
 server:
   port: 9090
+  ssl:
+    key-alias: promocode
+    key-store: classpath:promocode.jks
+    key-store-password: promocode
+    key-store-type: JKS
 
 springdoc:
   api-docs:

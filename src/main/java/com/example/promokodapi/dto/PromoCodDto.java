@@ -27,5 +27,7 @@ public class PromoCodDto {
 
     private String expireDate;
 
+    private String link;
+
     private Boolean isActive;
 }

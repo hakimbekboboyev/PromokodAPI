@@ -6,6 +6,8 @@ import com.example.promokodapi.dto.ResponsePromo;
 import com.example.promokodapi.dto.ResponseSearch;
 import com.example.promokodapi.entity.CategoryEntity;
 import com.example.promokodapi.entity.PromoCodEntity;
+import com.example.promokodapi.entity.user.Statistics;
+import com.example.promokodapi.repository.StatRepository;
 import com.example.promokodapi.service.PromoService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -14,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/promo")
@@ -21,6 +24,9 @@ import java.util.List;
 public class PromoCodController implements BaseController {
     @Autowired
     PromoService promoService;
+
+    @Autowired
+    StatRepository statRepository;
 
     @Override
     @Operation(summary = "addPromoCode", description = "Add Promo")
@@ -34,6 +40,12 @@ public class PromoCodController implements BaseController {
     @Operation(summary = "getAllPromo", description = "Get All Promo")
     @GetMapping("/getAllPromo")
     public ResponseEntity<List<PromoCodEntity>> getAllPromoCod(){
+        Optional<Statistics> statistics = statRepository.findById(1);
+        if (statistics.isPresent()) {
+            Statistics stat = statistics.get();
+            stat.setCount(stat.getCount() + 1);
+            statRepository.save(stat);
+        }
         promoService.checkPromoCodeDate();
         return ResponseEntity.ok(promoService.getAllPromoCode());
     }
@@ -42,6 +54,12 @@ public class PromoCodController implements BaseController {
     @Operation(summary = "getAllCategory", description = "Get All Category")
     @GetMapping("/getAllCategory")
     public ResponseEntity<List<CategoryEntity>> getAllCategory() {
+        Optional<Statistics> statistics = statRepository.findById(1);
+        if (statistics.isPresent()) {
+            Statistics stat = statistics.get();
+            stat.setCount(stat.getCount() + 1);
+            statRepository.save(stat);
+        }
         return ResponseEntity.ok(promoService.getAllCategory());
     }
 
@@ -84,5 +102,15 @@ public class PromoCodController implements BaseController {
     public ResponseEntity<ResponsePromo> getCategoryById(@PathVariable int id) {
         ResponsePromo categoryById = promoService.getCategoryById(id);
         return ResponseEntity.status(categoryById.getStatus()).body(categoryById);
+    }
+
+    @GetMapping("/getStatistics")
+    public ResponseEntity getStatistics() {
+        Statistics stat = new Statistics();
+        Optional<Statistics> statistics = statRepository.findById(1);
+        if (statistics.isPresent()) {
+            stat = statistics.get();
+        }
+        return ResponseEntity.status(200).body("statistic is " + stat.getCount());
     }
 }

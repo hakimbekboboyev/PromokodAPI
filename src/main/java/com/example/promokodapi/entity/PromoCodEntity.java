@@ -32,6 +32,10 @@ public class PromoCodEntity {
 
     private Boolean isActive;
 
+    private String link;
+
+    private long rating;
+
     private String image;
 
 }
