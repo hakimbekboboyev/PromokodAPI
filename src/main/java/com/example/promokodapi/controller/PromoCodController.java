@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@CrossOrigin(origins = "*")
+@CrossOrigin
 @RequestMapping("/api/v1/promo")
 @SecurityRequirement(name = "bearerAuth")
 public class PromoCodController implements BaseController {

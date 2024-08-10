@@ -29,7 +29,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
         servers = {
                 @Server(
                         description = "Dev api",
-                        url = "http://3.129.216.238:9090"
+                        url = "http://3.15.149.57:9090"
                 ),
                 @Server(
                         description = "Dev(test)",
