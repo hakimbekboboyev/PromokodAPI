@@ -20,16 +20,16 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
                 description = "Doing CRUD operations",
                 termsOfService = "Terms of service",
                 contact = @Contact(
-                        name = "PromoCode promocodlar.uz"
+                        name = "PromoCode promokodlar.uz"
                 ),
                 license = @License(
-                        name = "License by Promocodlar.uz"
+                        name = "License by Promokodlar.uz"
                 )
         ),
         servers = {
                 @Server(
                         description = "Dev api",
-                        url = "http://3.15.149.57:9090"
+                        url = "https://18.221.85.188:9090"
                 ),
                 @Server(
                         description = "Dev(test)",
