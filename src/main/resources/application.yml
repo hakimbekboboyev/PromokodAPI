@@ -24,13 +24,13 @@ server:
 #    key-store: classpath:promocode.p12
 #    key-store-password: promocode
 #    key-store-type: PKCS12
-#logging:
-#  level:
-#    org:
-#      apache:
-#        coyote:
-#          http11:
-#            Http11Processor: DEBUG
+logging:
+  level:
+    org:
+      apache:
+        coyote:
+          http11:
+            Http11Processor: DEBUG
 
 springdoc:
   api-docs:
